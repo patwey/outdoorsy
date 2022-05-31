@@ -10,4 +10,8 @@ describe Customer do
     it { should allow_value("test123@email.org").for(:email) }
     it { should_not allow_value("test123@email").for(:email) }
   end
+
+  context "associations" do
+    it { should have_many(:vehicles) }
+  end
 end

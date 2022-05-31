@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_31_182502) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_31_191745) do
   create_table "customers", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.integer "length"
+    t.integer "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_vehicles_on_customer_id"
   end
 
 end
