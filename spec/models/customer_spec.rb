@@ -12,6 +12,6 @@ describe Customer do
   end
 
   context "associations" do
-    it { should have_many(:vehicles) }
+    it { should have_many(:vehicles).dependent(:destroy) }
   end
 end

@@ -5,5 +5,5 @@ class Customer < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
 
-  has_many :vehicles
+  has_many :vehicles, dependent: :destroy
 end

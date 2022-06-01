@@ -9,9 +9,9 @@ feature "customer imports", js: true do
   scenario "user submits new customer import form" do
     visit "/customer_imports/new"
 
-    attach_file("file", "#{Rails.root}/spec/fixtures/customer_import.txt")
+    attach_file("file", "#{Rails.root}/spec/fixtures/pipes.txt")
     click_button("Submit")
 
-    expect(page).to have_text("customer_import.txt | pending")
+    expect(page).to have_text("pipes.txt | pending")
   end
 end

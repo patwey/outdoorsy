@@ -1,6 +1,7 @@
 describe CustomerImportsController do
   describe "GET index" do
     before do
+      ActiveJob::Base.queue_adapter = :test
       3.times { create(:customer_import) }
     end
 
@@ -26,7 +27,7 @@ describe CustomerImportsController do
 
   describe "POST create" do
     let(:file) do
-      Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/customer_import.txt", "txt")
+      Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/pipes.txt", "txt")
     end
 
     it "creates a customer import" do

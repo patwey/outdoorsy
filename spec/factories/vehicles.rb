@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :vehicle do
     name { "Big Wheel" }
-    type { "bicycle" }
+    kind { Vehicle::BICYCLE }
     length { 5 }
     customer
   end

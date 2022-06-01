@@ -7,7 +7,7 @@ class CustomerImportsController < ApplicationController
     customer_import.file.attach(customer_import_params["file"])
 
     if customer_import.save
-      # TODO: customer_import.process
+      customer_import.process
       json_response(CustomerImportSerializer.new(customer_import), :created)
     else
       json_response({ errors: customer_import.errors.full_messages }, :bad_request)
