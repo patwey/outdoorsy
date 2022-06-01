@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :customer_imports, only: [:new]
+  resources :customer_imports, only: [:new, :create, :index]
 end

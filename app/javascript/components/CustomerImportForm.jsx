@@ -1,8 +1,12 @@
 import React, { useState } from "react"
 
-const CustomerImportForm = () => {
+const CustomerImportForm = ({
+  appendCustomerImport,
+  token,
+}) => {
   const [file, setFile] = useState(null);
   const [fileValidationMessage, setFileValidationMessage] = useState(null);
+  const [submitErrors, setSubmitErrors] = useState([])
 
   const validateForm = () => {
     let isValid = true;
@@ -17,10 +21,36 @@ const CustomerImportForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSubmitErrors([]);
+
     const isValid = validateForm();
 
     if (isValid) {
-      alert("File submitted");
+      const body = new FormData();
+
+      body.append("file", file);
+
+      fetch(
+        "/customer_imports",
+        {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": token,
+            Accept: "application/json",
+          },
+          body,
+        },
+      )
+      .then(response => response.json())
+      .then(({ data }) => {
+        const { errors } = data;
+
+        if (errors) {
+          setSubmitErrors(errors);
+        } else {
+          appendCustomerImport(data);
+        }
+      });
     }
   };
 
@@ -33,7 +63,7 @@ const CustomerImportForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Import New Customers</h1>
+      <h1>New Customer Import</h1>
 
       <label htmlFor="file">File</label>
       <input
@@ -49,6 +79,15 @@ const CustomerImportForm = () => {
       <div>
         <input type="submit" value="Submit" />
       </div>
+
+      {submitErrors.length > 0 && (
+        <div>
+          Unable to save import due to the following errors:
+          <ul>
+            {submitErrors.map(error => <li>{error}</li>)}
+          </ul>
+        </div>
+      )}
     </form>
   );
 };
