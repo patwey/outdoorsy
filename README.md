@@ -10,6 +10,9 @@
   * [Installing Ruby](#installing-ruby)
   * [Installing Rails](#installing-rails)
   * [Installing Bundler](#installing-bundler)
+  * [Installing Redis](#installing-redis)
+  * [Installing node and npm](#installing-node-and-npm)\* - Possible source of environment issues/confusion
+  * [Installing yarn](#installing-yarn)
 - [Starting the Application](#starting-the-application)
 
 ### Overview
@@ -115,15 +118,15 @@ And install all the dependencies:
 $ bundle install
 ```
 
-#### Install Redis
+#### Installing Redis
 
 Follow the instructions [here](https://redis.io/docs/getting-started/) to ensure redis is installed
 
-#### Install Node.js and npm
+#### Installing node and npm
 
 Follow the instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install Node.js and npm. 
 
-I ran into issues using newer versions of Node with webpacker (see: https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported). For this application, ensure that you're using node v16.x.x.
+I ran into issues using newer versions of Node with webpacker (see: [stackoverflow question](https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported)). For this application, **ensure that you're using node v16.x.x**.
 
 ```bash
 $ node -v
@@ -135,10 +138,10 @@ If you have nvm installed, you can leverage the `.nvmrc` file and simply run:
 $ nvm use
 ```
 
-#### Install yarn
-Follow the instructions [here](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) to ensure yarn is installed
+#### Installing yarn
+Follow the instructions [here](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) to ensure yarn is installed.
 
-Install yarn dependencies
+Next, install yarn dependencies:
 ```bash
 $ yarn install
 ```
@@ -164,4 +167,4 @@ Start sidekiq with:
 $ bundle exec sidekiq
 ```
 
-To see the application in action, visit: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
+Lastly, to see the application in action, visit: [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
