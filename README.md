@@ -121,7 +121,19 @@ Follow the instructions [here](https://redis.io/docs/getting-started/) to ensure
 
 #### Install Node.js and npm
 
-Follow the instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install Node.js and npm. I was running into issues with the lastest node version and webpack. I was able to get around them by switching to v16.9.1 (see: https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported)
+Follow the instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install Node.js and npm. 
+
+I ran into issues using newer versions of Node with webpacker (see: https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported). For this application, ensure that you're using node v16.x.x.
+
+```bash
+$ node -v
+v16.15.1
+```
+
+If you have nvm installed, you can leverage the `.nvmrc` file and simply run:
+```bash
+$ nvm use
+```
 
 #### Install yarn
 Follow the instructions [here](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) to ensure yarn is installed
