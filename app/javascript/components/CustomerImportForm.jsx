@@ -5,90 +5,78 @@ const CustomerImportForm = ({
   token,
 }) => {
   const [file, setFile] = useState(null);
-  const [fileValidationMessage, setFileValidationMessage] = useState(null);
   const [submitErrors, setSubmitErrors] = useState([])
-
-  const validateForm = () => {
-    let isValid = true;
-
-    if (!file) {
-      isValid = false;
-      setFileValidationMessage("File is required");
-    }
-
-    return isValid;
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitErrors([]);
 
-    const isValid = validateForm();
+    const body = new FormData();
 
-    if (isValid) {
-      const body = new FormData();
+    body.append("file", file);
 
-      body.append("file", file);
-
-      fetch(
-        "/api/v1/customer_imports",
-        {
-          method: "POST",
-          headers: {
-            "X-CSRF-Token": token,
-            Accept: "application/json",
-          },
-          body,
+    fetch(
+      "/api/v1/customer_imports",
+      {
+        method: "POST",
+        headers: {
+          "X-CSRF-Token": token,
+          Accept: "application/json",
         },
-      )
-      .then(response => response.json())
-      .then(({ data }) => {
-        const { errors } = data;
+        body,
+      },
+    )
+    .then(response => response.json())
+    .then(({ data }) => {
+      const { errors } = data;
 
-        if (errors) {
-          setSubmitErrors(errors);
-        } else {
-          appendCustomerImport(data);
-        }
-      });
-    }
+      if (errors) {
+        setSubmitErrors(errors);
+      } else {
+        appendCustomerImport(data);
+      }
+    });
   };
 
   const handleFileChange = (event) => {
     const eventFile = event.target.files[0];
 
     setFile(eventFile);
-    setFileValidationMessage(null);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>New Customer Import</h1>
-
-      <label htmlFor="file">File</label>
-      <input
-        id="file"
-        type="file"
-        accept=".txt,.csv"
-        onChange={handleFileChange}
-      />
-      {fileValidationMessage && (
-        <span>{fileValidationMessage}</span>
-      )}
-
-      <div>
-        <input type="submit" value="Submit" />
-      </div>
-
-      {submitErrors.length > 0 && (
-        <div>
-          Unable to save import due to the following errors:
-          <ul>
-            {submitErrors.map(error => <li>{error}</li>)}
-          </ul>
+    <React.Fragment>
+      <h5>Add Customers</h5>
+      <form onSubmit={handleSubmit}>
+        {submitErrors.length > 0 && (
+          <div className="row">
+            <ul>
+              Unable to save customer import:
+              {submitErrors.map(error => <li>{error}</li>)}
+            </ul>
+          </div>
+        )}
+        <div className="row">
+          <div className="ten columns">
+            <label htmlFor="file">File</label>
+            <input
+              id="file"
+              type="file"
+              accept=".txt,.csv"
+              onChange={handleFileChange}
+            />
+          </div>
+          <div className="two columns">
+            <input
+              style={{ marginTop: "2.5rem" }}
+              type="submit"
+              value="Submit"
+              className={file ? "button-primary" : "button"}
+              disabled={!file}
+            />
+          </div>
         </div>
-      )}
-    </form>
+      </form>
+    </React.Fragment>
   );
 };
 

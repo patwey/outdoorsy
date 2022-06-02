@@ -26,13 +26,13 @@ const CustomerImports = ({
   }
 
   return (
-    <React.Fragment>
+    <div className="container">
       <CustomerImportForm
         token={token}
         appendCustomerImport={appendCustomerImport}
       />
       <CustomerImportList customerImports={customerImports} />
-    </React.Fragment>
+    </div>
   );
 };
 

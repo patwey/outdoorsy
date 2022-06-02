@@ -6,9 +6,11 @@ const Vehicle = ({
   length,
 }) => {
   return (
-    <div>
-      <em>{name}</em> | {kind} | {length}
-    </div>
+    <React.Fragment>
+      <td style={{paddingLeft: "15px"}}>{name}</td>
+      <td>{kind}</td>
+      <td>{length}</td>
+    </React.Fragment>
   );
 };
 

@@ -1,6 +1,9 @@
 class Api::V1::CustomerImportsController < Api::V1::BaseController
   def create
-    customer_import = CustomerImport.new(status: CustomerImport::PENDING)
+    customer_import = CustomerImport.new(
+      status: CustomerImport::PENDING,
+      metadata: { success: [], error: [] },
+    )
     customer_import.file.attach(customer_import_params["file"])
 
     if customer_import.save

@@ -1,31 +1,25 @@
 import React, { useState } from "react";
-import { nullSort, fullNameSort, firstVehicleKindSort } from "../utils/customer-sorts";
 import Customer from "./Customer";
 
 const CustomerList = ({
   customers,
 }) => {
-  const [sortType, setSortType] = useState("nullSort");
-
-  const sorts = {
-    nullSort,
-    fullNameSort,
-    firstVehicleKindSort,
-  };
-
-  const sortedCustomers = customers.slice().sort(sorts[sortType]);
-
-  const handleSortChange = event => setSortType(event.target.value);
-
   return (
     <React.Fragment>
-      <label htmlFor="sort">Sort:</label>
-      <select name="sort" onChange={handleSortChange}>
-        <option value="nullSort">Default</option>
-        <option value="fullNameSort">Full Name</option>
-        <option value="firstVehicleKindSort">Vehicle Type</option>
-      </select>
-      {sortedCustomers.map(({ id, ...customer }) => <Customer key={id} {...customer} />)}
+      <table className="u-full-width">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Vehicle Name</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Length (ft.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {customers.map(({ id, ...customer }) => <Customer key={id} {...customer} />)}
+        </tbody>
+      </table>
     </React.Fragment>
   );
 }
