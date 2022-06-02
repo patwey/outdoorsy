@@ -1,4 +1,4 @@
-describe CustomerImportsController do
+describe Api::V1::CustomerImportsController do
   describe "GET index" do
     before do
       ActiveJob::Base.queue_adapter = :test

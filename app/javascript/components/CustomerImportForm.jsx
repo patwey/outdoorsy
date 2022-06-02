@@ -31,7 +31,7 @@ const CustomerImportForm = ({
       body.append("file", file);
 
       fetch(
-        "/customer_imports",
+        "/api/v1/customer_imports",
         {
           method: "POST",
           headers: {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import CustomerImportForm from "./CustomerImportForm";
 import CustomerImportList from "./CustomerImportList";
 
@@ -9,19 +9,16 @@ const CustomerImports = ({
 
   useEffect(() => {
     fetch(
-      "/customer_imports",
+      "/api/v1/customer_imports",
       {
         method: "GET",
         headers: {
-          "X-CSRF-Token": token,
           Accept: "application/json",
         },
       }
     )
     .then(response => response.json())
-    .then((response) => {
-      setCustomerImports(response.data);
-    })
+    .then(response => setCustomerImports(response.data));
   }, []);
 
   const appendCustomerImport = (customerImport) => {
