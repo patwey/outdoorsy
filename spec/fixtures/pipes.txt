@@ -1,4 +1,6 @@
 Ansel|Adams|a@adams.com|motorboat|Rushing Water|24’
+Ansel|Adams|a@adams.com|bicycle|El Capitan|5 ft
+Ansel|Adams|a@adams.com|campervan|Moon and Half Dome|16 feet
 Steve|Irwin|steve@crocodiles.com|RV|G’Day For Adventure|32 ft
 Isatou|Ceesay|isatou@recycle.com|campervan|Plastic To Purses|20’
 Naomi|Uemura|n.uemura@gmail.com|bicycle|Glacier Glider|5 feet

@@ -8,6 +8,7 @@ describe Vehicle do
     it { should validate_presence_of(:length) }
     it { should validate_inclusion_of(:kind).in_array(described_class::KINDS) }
     it { should validate_numericality_of(:length).only_integer }
+    it { should validate_uniqueness_of(:name).scoped_to(:customer_id).case_insensitive }
   end
 
   context "associations" do

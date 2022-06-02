@@ -124,6 +124,18 @@ describe CustomerImport::Importer do
             customer: { email: "a@adams.com" },
           },
           {
+            kind: "bicycle",
+            name: "El Capitan",
+            length: 5,
+            customer: { email: "a@adams.com" },
+          },
+          {
+            kind: "campervan",
+            name: "Moon and Half Dome",
+            length: 16,
+            customer: { email: "a@adams.com" },
+          },
+          {
             kind: "rv",
             name: "G’Day For Adventure",
             length: 32,

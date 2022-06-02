@@ -47,11 +47,22 @@ class CustomerImport::Importer
   end
 
   def create_customer(data)
-    customer_attributes =
-      data.
-        slice(*CustomerImport::FileSchema::CUSTOMER_COLUMNS).
-        merge({ customer_import_id: customer_import.id })
-    customer = Customer.create!(customer_attributes)
+    customer_attributes = customer_attributes(data)
+    customer = Customer.find_by(email: customer_attributes[:email])
+
+    if customer
+      customer.update!(customer_attributes)
+    else
+      customer = Customer.create!(customer_attributes)
+    end
+
+    customer
+  end
+
+  def customer_attributes(data)
+    data.
+      slice(*CustomerImport::FileSchema::CUSTOMER_COLUMNS).
+      merge({ customer_import_id: customer_import.id })
   end
 
   def create_vehicle(data, customer)
