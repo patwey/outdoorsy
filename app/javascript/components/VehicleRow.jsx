@@ -1,6 +1,6 @@
 import React from "react";
 
-const Vehicle = ({
+const VehicleRow = ({
   name,
   kind,
   length,
@@ -14,4 +14,4 @@ const Vehicle = ({
   );
 };
 
-export default Vehicle;
+export default VehicleRow;

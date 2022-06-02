@@ -1,8 +1,8 @@
 import React from "react";
-import VehicleList from "./VehicleList";
-import Vehicle from "./Vehicle";
+import VehicleRows from "./VehicleRows";
+import VehicleRow from "./VehicleRow";
 
-const Customer = ({
+const CustomerRow = ({
   email,
   first_name: firstName,
   last_name: lastName,
@@ -15,11 +15,11 @@ const Customer = ({
       <tr>
         <td rowSpan={vehicles.length}>{firstName} {lastName}</td>
         <td rowSpan={vehicles.length}>{email}</td>
-        <Vehicle key={firstVehicle.id} {...firstVehicle} />
+        <VehicleRow key={firstVehicle.id} {...firstVehicle} />
       </tr>
-      <VehicleList vehicles={otherVehicles} />
+      <VehicleRows vehicles={otherVehicles} />
     </React.Fragment>
   );
 };
 
-export default Customer;
+export default CustomerRow;

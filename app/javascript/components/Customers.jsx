@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react"
-import CustomerList from "./CustomerList";
+import CustomerTable from "./CustomerTable";
 import SortSelect from "./SortSelect";
 import { nullSort, fullNameSort, firstVehicleKindSort } from "../utils/customer-sorts";
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [sortType, setSortType] = useState("nullSort");
-
-  const sorts = {
-    nullSort,
-    fullNameSort,
-    firstVehicleKindSort,
-  };
-
-  const sortedCustomers = customers.slice().sort(sorts[sortType]);
-
-  const handleSortChange = event => setSortType(event.target.value);
 
   useEffect(() => {
     fetch(
@@ -30,6 +20,16 @@ const Customers = () => {
     .then(response => response.json())
     .then(response => setCustomers(response.data));
   }, []);
+
+  const sorts = {
+    nullSort,
+    fullNameSort,
+    firstVehicleKindSort,
+  };
+
+  const sortedCustomers = customers.slice().sort(sorts[sortType]);
+
+  const handleSortChange = event => setSortType(event.target.value);
 
   return (
     <div className="container">
@@ -48,7 +48,7 @@ const Customers = () => {
           />
         </div>
       </div>
-      <CustomerList customers={sortedCustomers} />
+      <CustomerTable customers={sortedCustomers} />
     </div>
   );
 }

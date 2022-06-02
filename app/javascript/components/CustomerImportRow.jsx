@@ -1,6 +1,6 @@
 import React from "react"
 
-const CustomerImport = ({
+const CustomerImportRow = ({
   file: { filename },
   status,
   created_at: createdAt,
@@ -21,4 +21,4 @@ const CustomerImport = ({
   );
 };
 
-export default CustomerImport;
+export default CustomerImportRow;

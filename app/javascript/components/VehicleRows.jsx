@@ -1,18 +1,18 @@
 import React from "react";
-import Vehicle from "./Vehicle";
+import VehicleRow from "./VehicleRow";
 
-const VehicleList = ({
+const VehicleRows = ({
   vehicles,
 }) => {
   return (
     <React.Fragment>
       {vehicles.map(({ id, ...vehicle }) => (
         <tr>
-          <Vehicle key={id} {...vehicle} />
+          <VehicleRow key={id} {...vehicle} />
         </tr>
       ))}
     </React.Fragment>
   );
 };
 
-export default VehicleList;
+export default VehicleRows;

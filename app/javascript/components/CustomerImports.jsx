@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CustomerImportForm from "./CustomerImportForm";
-import CustomerImportList from "./CustomerImportList";
+import CustomerImportTable from "./CustomerImportTable";
 
 const CustomerImports = ({
   token,
@@ -31,7 +31,7 @@ const CustomerImports = ({
         token={token}
         appendCustomerImport={appendCustomerImport}
       />
-      <CustomerImportList customerImports={customerImports} />
+      <CustomerImportTable customerImports={customerImports} />
     </div>
   );
 };

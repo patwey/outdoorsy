@@ -1,7 +1,7 @@
 import React from "react"
-import CustomerImport from "./CustomerImport";
+import CustomerImportRow from "./CustomerImportRow";
 
-const CustomerImportList = ({
+const CustomerImportTable = ({
   customerImports,
 }) => {
   return (
@@ -18,11 +18,13 @@ const CustomerImportList = ({
           </tr>
         </thead>
         <tbody>
-          {customerImports.map(({id, ...customerImport}) => <CustomerImport key={id} {...customerImport} />)}
+          {customerImports.map(({id, ...customerImport}) => (
+            <CustomerImportRow key={id} {...customerImport} />
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-export default CustomerImportList;
+export default CustomerImportTable;
