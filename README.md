@@ -115,10 +115,24 @@ And install all the dependencies:
 $ bundle install
 ```
 
+#### Install Redis
+
+Follow the instructions [here](https://redis.io/docs/getting-started/) to ensure redis is installed on your system
+
 ### Starting the Application
+Run the migration with:
+```bash
+$ bin/rails db:migrate
+```
+
 Start the server with:
 ```bash
 $ bin/rails server
+```
+
+Start redis with:
+```bash
+$ redis-server
 ```
 
 Start sidekiq with:
