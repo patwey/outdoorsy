@@ -1,13 +1,13 @@
-describe CustomerImport::Importer do
+describe Import::Importer do
   describe "#run" do
-    context "given a customer import with a comma separated file" do
+    context "with a customer import with a comma separated file" do
       let(:customer_import) { create(:customer_import, :comma_separated_file) }
       let(:expected_customers) do
         [
           {
             first_name: "Greta",
             last_name: "Thunberg",
-            email: "greta@future.com"
+            email: "greta@future.com",
           },
           {
             first_name: "Xiuhtezcatl",
@@ -60,7 +60,7 @@ describe CustomerImport::Importer do
         described_class.new(customer_import).run
 
         expected_customers.each do |attributes|
-          expect(Customer.find_by(attributes)).to be_present
+          expect(Customer.find_by(attributes).present?).to be(true)
         end
       end
 
@@ -70,7 +70,7 @@ describe CustomerImport::Importer do
         expected_vehicles.each do |attributes|
           v = Vehicle.joins(:customer).find_by(attributes)
 
-          expect(v).to be_present
+          expect(v.present?).to be(true)
         end
       end
 
@@ -83,12 +83,12 @@ describe CustomerImport::Importer do
       it "updates customer import metadata" do
         described_class.new(customer_import).run
 
-        expect(customer_import.metadata["success"]).to be_a(Array)
-        expect(customer_import.metadata).to have_key("error")
+        expect(customer_import.metadata["success"].is_a?(Array)).to be(true)
+        expect(customer_import.metadata.key?("error")).to be(true)
       end
     end
 
-    context "given a customer import with a pipe separated file" do
+    context "with a customer import with a pipe separated file" do
       let(:customer_import) { create(:customer_import, :pipe_separated_file) }
       let(:expected_customers) do
         [
@@ -160,7 +160,7 @@ describe CustomerImport::Importer do
         described_class.new(customer_import).run
 
         expected_customers.each do |attributes|
-          expect(Customer.find_by(attributes)).to be_present
+          expect(Customer.find_by(attributes).present?).to be(true)
         end
       end
 
@@ -170,7 +170,7 @@ describe CustomerImport::Importer do
         expected_vehicles.each do |attributes|
           v = Vehicle.joins(:customer).find_by(attributes)
 
-          expect(v).to be_present
+          expect(v.present?).to be(true)
         end
       end
 
@@ -183,8 +183,8 @@ describe CustomerImport::Importer do
       it "updates customer import metadata" do
         described_class.new(customer_import).run
 
-        expect(customer_import.metadata["success"]).to be_a(Array)
-        expect(customer_import.metadata).to have_key("error")
+        expect(customer_import.metadata["success"].is_a?(Array)).to be(true)
+        expect(customer_import.metadata.key?("error")).to be(true)
       end
     end
   end

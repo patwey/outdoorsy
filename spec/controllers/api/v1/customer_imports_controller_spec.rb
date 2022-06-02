@@ -2,7 +2,7 @@ describe Api::V1::CustomerImportsController do
   describe "GET index" do
     before do
       ActiveJob::Base.queue_adapter = :test
-      3.times { create(:customer_import) }
+      create_list(:customer_import, 3)
     end
 
     it "returns all customer imports" do
@@ -10,7 +10,7 @@ describe Api::V1::CustomerImportsController do
 
       data = JSON.parse(response.body)["data"]
 
-      expect(data).to be_a(Array)
+      expect(data.is_a?(Array)).to be(true)
       expect(response).to have_http_status(:ok)
 
       CustomerImport.all.each do |customer_import|
@@ -31,13 +31,13 @@ describe Api::V1::CustomerImportsController do
     end
 
     it "creates a customer import" do
-      expect { post :create, params: { file: file } }.to change { CustomerImport.count }.by(1)
+      expect { post :create, params: { file: file } }.to change(CustomerImport, :count).by(1)
 
       expect(response).to have_http_status(:created)
 
       record = JSON.parse(response.body)["data"]
 
-      expect(record).to be_a(Hash)
+      expect(record.is_a?(Hash)).to be(true)
       expect(record["status"]).to eq("pending")
       expect(record["file"]["filename"]).to eq(file.original_filename)
     end

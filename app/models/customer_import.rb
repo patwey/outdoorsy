@@ -1,8 +1,8 @@
 class CustomerImport < ApplicationRecord
-  PENDING = "pending"
-  PROCESSING = "processing"
-  COMPLETE = "complete"
-  STATUSES = [PENDING, PROCESSING, COMPLETE]
+  PENDING = "pending".freeze
+  PROCESSING = "processing".freeze
+  COMPLETE = "complete".freeze
+  STATUSES = [PENDING, PROCESSING, COMPLETE].freeze
 
   validates :status, presence: true, inclusion: { in: STATUSES }
   validate :file_attached
@@ -11,7 +11,7 @@ class CustomerImport < ApplicationRecord
   has_many :customers
 
   def process
-    CustomerImport::ImporterJob.perform_later(id)
+    Import::ImporterJob.perform_later(id)
   end
 
   def processing!
@@ -21,8 +21,6 @@ class CustomerImport < ApplicationRecord
   private
 
   def file_attached
-    unless file.attached?
-      errors.add(:file, "must be attached")
-    end
+    errors.add(:file, "must be attached") unless file.attached?
   end
 end

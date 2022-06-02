@@ -18,7 +18,7 @@ describe Api::V1::CustomersController do
       Customer.includes(:vehicles).each do |customer|
         customer_data = data.detect { |d| d["id"] == customer.id }
 
-        expect(customer_data).to be_present
+        expect(customer_data.present?).to be(true)
         expect(customer_data["email"]).to eq(customer.email)
         expect(customer_data["first_name"]).to eq(customer.first_name)
         expect(customer_data["last_name"]).to eq(customer.last_name)
@@ -26,13 +26,12 @@ describe Api::V1::CustomersController do
         customer.vehicles.each do |vehicle|
           vehicle_data = customer_data["vehicles"].detect { |d| d["id"] == vehicle.id }
 
-          expect(vehicle_data).to be_present
+          expect(vehicle_data.present?).to be(true)
           expect(vehicle_data["name"]).to eq(vehicle.name)
           expect(vehicle_data["kind"]).to eq(vehicle.kind)
           expect(vehicle_data["length"]).to eq(vehicle.length)
           expect(vehicle_data["customer_id"]).to eq(vehicle.customer_id)
         end
-
       end
     end
   end

@@ -3,7 +3,7 @@ class CustomerSerializer
     @source = source
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     if source.is_a?(Customer)
       customer_hash(source)
     else

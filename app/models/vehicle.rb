@@ -1,17 +1,11 @@
 class Vehicle < ApplicationRecord
-  BICYCLE = "bicycle"
-  CAMPERVAN = "campervan"
-  MOTORBOAT = "motorboat"
-  RV = "rv"
-  SAILBOAT = "sailboat"
+  BICYCLE = "bicycle".freeze
+  CAMPERVAN = "campervan".freeze
+  MOTORBOAT = "motorboat".freeze
+  RV = "rv".freeze
+  SAILBOAT = "sailboat".freeze
 
-  KINDS = [
-    BICYCLE,
-    CAMPERVAN,
-    MOTORBOAT,
-    RV,
-    SAILBOAT,
-  ]
+  KINDS = [BICYCLE, CAMPERVAN, MOTORBOAT, RV, SAILBOAT].freeze
 
   validates :name, presence: true, uniqueness: { scope: :customer_id, case_sensitive: false }
   validates :kind, presence: true, inclusion: { in: KINDS }

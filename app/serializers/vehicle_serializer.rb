@@ -3,7 +3,7 @@ class VehicleSerializer
     @source = source
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     if source.is_a?(Vehicle)
       vehicle_hash(source)
     else

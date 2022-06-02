@@ -1,0 +1,213 @@
+require:
+  - rubocop/cop/internal_affairs
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/*'
+    - db/schema.rb
+    - config/**/*
+    - .*
+  TargetRubyVersion: 2.6
+  SuggestExtensions: false
+
+Naming/PredicateName:
+  # Method define macros for dynamically generated method.
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
+    - def_node_matcher
+    - def_node_search
+
+Style/AccessorGrouping:
+  Exclude:
+    - lib/rubocop/formatter/base_formatter.rb
+    - lib/rubocop/cop/offense.rb
+
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+
+Style/FormatStringToken:
+  # Because we parse a lot of source codes from strings. Percent arrays
+  # look like unannotated format string tokens to this cop.
+  Exclude:
+    - spec/**/*
+
+Style/FrozenStringLiteralComment:
+  Description: >-
+    Add the frozen_string_literal comment to the top of files
+    to help transition from Ruby 2.3.0 to Ruby 3.0.
+  Enabled: false
+
+Style/StringLiterals:
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#consistent-string-literals"
+  EnforcedStyle: double_quotes
+  Enabled: true
+
+Style/IpAddresses:
+  # The test for this cop includes strings that would cause offenses
+  Exclude:
+    - spec/rubocop/cop/style/ip_addresses_spec.rb
+
+Style/TrailingCommaInArguments:
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas"
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+  Enabled: true
+
+Style/TrailingCommaInHashLiteral:
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas"
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+  Enabled: true
+
+Style/TrailingCommaInArrayLiteral:
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas"
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+  Enabled: true
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Layout/ClassStructure:
+  Enabled: true
+
+Layout/RedundantLineBreak:
+  Enabled: true
+
+Layout/TrailingWhitespace:
+  AllowInHeredoc: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - key
+    - table
+
+Layout/LineLength:
+  Max: 100
+  AllowedPatterns:
+    - !ruby/regexp /\A +(it|describe|context|shared_examples|include_examples|it_behaves_like) ["']/
+
+Lint/InterpolationCheck:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Lint/UselessAccessModifier:
+  MethodCreatingMethods:
+    - 'def_matcher'
+    - 'def_node_matcher'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+
+Metrics/ClassLength:
+  Exclude:
+    - lib/rubocop/config_obsoletion.rb
+    - lib/rubocop/options.rb
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 10 lines of code.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
+  Enabled: false
+
+Naming/InclusiveLanguage:
+  Enabled: true
+  CheckStrings: true
+  FlaggedTerms:
+    behaviour:
+      Suggestions:
+        - behavior
+    offence:
+      Suggestions:
+        - offense
+  Exclude:
+    - lib/rubocop/cop/naming/inclusive_language.rb
+    - spec/rubocop/cop/naming/inclusive_language_spec.rb
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/FilePath:
+  Exclude:
+    - spec/rubocop/cop/internal_affairs/redundant_let_rubocop_config_new_spec.rb
+    - spec/rubocop/formatter/junit_formatter_spec.rb
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+
+RSpec/NestedGroups:
+  Max: 7
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Performance/CollectionLiteralInLoop:
+  Exclude:
+    - 'Rakefile'
+    - 'spec/**/*.rb'
+
+Performance/EndWith:
+  SafeMultiline: false
+
+Performance/StartWith:
+  SafeMultiline: false
+
+RSpec/StubbedMock:
+  Enabled: false
+
+InternalAffairs/ExampleDescription:
+  Include:
+    - 'spec/rubocop/cop/**/*.rb'
+
+InternalAffairs/UndefinedConfig:
+  Include:
+    - 'lib/rubocop/cop/**/*.rb'
+  Exclude:
+    - 'lib/rubocop/cop/correctors/**/*.rb'
+    - 'lib/rubocop/cop/mixin/**/*.rb'
+
+InternalAffairs/StyleDetectedApiUse:
+  Exclude:
+    - 'lib/rubocop/cop/mixin/percent_array.rb'
+
+Gemspec/DependencyVersion:
+  Enabled: true

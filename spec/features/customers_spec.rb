@@ -1,15 +1,15 @@
-feature "customers", js: true do
+describe "customers", js: true do
   let!(:customer) { create(:customer) }
   let!(:vehicle) { create(:vehicle, customer: customer) }
 
-  scenario "user visits customers index" do
+  it "user visits customers index" do
     visit "/customers"
 
-    expect(page).to have_text(customer.first_name)
-    expect(page).to have_text(customer.last_name)
-    expect(page).to have_text(customer.email)
-    expect(page).to have_text(vehicle.name)
-    expect(page).to have_text(vehicle.kind)
-    expect(page).to have_text(vehicle.length)
+    expect(page.has_text?(customer.first_name)).to be(true)
+    expect(page.has_text?(customer.last_name)).to be(true)
+    expect(page.has_text?(customer.email)).to be(true)
+    expect(page.has_text?(vehicle.name)).to be(true)
+    expect(page.has_text?(vehicle.kind)).to be(true)
+    expect(page.has_text?(vehicle.length)).to be(true)
   end
 end

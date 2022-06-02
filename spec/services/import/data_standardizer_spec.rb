@@ -1,4 +1,4 @@
-describe CustomerImport::DataStandardizer do
+describe Import::DataStandardizer do
   describe ".standardize_length" do
     it "converts input to an integer" do
       expect(described_class.standardize_length("24’")).to eq(24)

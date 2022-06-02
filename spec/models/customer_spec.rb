@@ -1,18 +1,13 @@
 describe Customer do
-  context "validations" do
-    subject { build(:customer) }
+  subject { build(:customer) }
 
-    it { should be_valid }
-    it { should validate_presence_of(:first_name) }
-    it { should validate_presence_of(:last_name) }
-    it { should validate_presence_of(:email) }
-    it { should validate_uniqueness_of(:email) }
-    it { should allow_value("test123@email.org").for(:email) }
-    it { should_not allow_value("test123@email").for(:email) }
-  end
-
-  context "associations" do
-    it { should have_many(:vehicles).dependent(:destroy) }
-    it { should belong_to(:customer_import) }
-  end
+  it { is_expected.to be_valid }
+  it { is_expected.to validate_presence_of(:first_name) }
+  it { is_expected.to validate_presence_of(:last_name) }
+  it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_uniqueness_of(:email) }
+  it { is_expected.to allow_value("test123@email.org").for(:email) }
+  it { is_expected.not_to allow_value("test123@email").for(:email) }
+  it { is_expected.to have_many(:vehicles).dependent(:destroy) }
+  it { is_expected.to belong_to(:customer_import) }
 end

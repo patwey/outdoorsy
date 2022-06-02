@@ -1,18 +1,18 @@
-feature "customer imports", js: true do
-  scenario "user visits new customer import form" do
+describe "customer imports", js: true do
+  it "user visits new customer import form" do
     visit "/customer_imports/new"
 
-    expect(page).to have_field("File")
-    expect(page).to have_button("Submit", disabled: true)
+    expect(page.has_field?("File")).to be(true)
+    expect(page.has_button?("Submit", disabled: true)).to be(true)
   end
 
-  scenario "user submits new customer import form" do
+  it "user submits new customer import form" do
     visit "/customer_imports/new"
 
     attach_file("file", "#{Rails.root}/spec/fixtures/pipes.txt")
     click_button("Submit")
 
-    expect(page).to have_text("pipes.txt")
-    expect(page).to have_text("pending")
+    expect(page.has_text?("pipes.txt")).to be(true)
+    expect(page.has_text?("pending")).to be(true)
   end
 end
