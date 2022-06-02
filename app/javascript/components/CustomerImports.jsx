@@ -15,15 +15,15 @@ const CustomerImports = ({
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     )
-    .then(response => response.json())
-    .then(response => setCustomerImports(response.data));
+      .then((response) => response.json())
+      .then((response) => setCustomerImports(response.data));
   }, []);
 
-  const appendCustomerImport = (customerImport) => {
+  const appendCustomerImport = (customerImport) => (
     setCustomerImports([customerImport, ...customerImports])
-  }
+  );
 
   return (
     <div className="container">

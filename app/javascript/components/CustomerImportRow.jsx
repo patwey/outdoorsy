@@ -1,11 +1,14 @@
-import React from "react"
+import React from "react";
 
 const CustomerImportRow = ({
-  file: { filename },
-  status,
-  created_at: createdAt,
-  metadata,
+  customerImport,
 }) => {
+  const {
+    file: { filename },
+    status,
+    created_at: createdAt,
+    metadata,
+  } = customerImport;
   const succesful = metadata.success.length;
   const failed = metadata.error.length;
   const formattedCreatedAt = new Date(createdAt).toLocaleString();

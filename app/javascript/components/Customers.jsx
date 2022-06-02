@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import CustomerTable from "./CustomerTable";
 import SortSelect from "./SortSelect";
 import { nullSort, fullNameSort, firstVehicleKindSort } from "../utils/customer-sorts";
@@ -15,10 +15,10 @@ const Customers = () => {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     )
-    .then(response => response.json())
-    .then(response => setCustomers(response.data));
+      .then((response) => response.json())
+      .then((response) => setCustomers(response.data));
   }, []);
 
   const sorts = {
@@ -29,7 +29,7 @@ const Customers = () => {
 
   const sortedCustomers = customers.slice().sort(sorts[sortType]);
 
-  const handleSortChange = event => setSortType(event.target.value);
+  const handleSortChange = (event) => setSortType(event.target.value);
 
   return (
     <div className="container">
@@ -51,6 +51,6 @@ const Customers = () => {
       <CustomerTable customers={sortedCustomers} />
     </div>
   );
-}
+};
 
 export default Customers;

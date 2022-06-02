@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 const CustomerImportForm = ({
   appendCustomerImport,
   token,
 }) => {
   const [file, setFile] = useState(null);
-  const [submitErrors, setSubmitErrors] = useState([])
+  const [submitErrors, setSubmitErrors] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,23 +25,23 @@ const CustomerImportForm = ({
         body,
       },
     )
-    .then(response => response.json())
-    .then(({ data }) => {
-      const { errors } = data;
+      .then((response) => response.json())
+      .then(({ data }) => {
+        const { errors } = data;
 
-      if (errors) {
-        setSubmitErrors(errors);
-      } else {
-        appendCustomerImport(data);
-      }
-    });
+        if (errors) {
+          setSubmitErrors(errors);
+        } else {
+          appendCustomerImport(data);
+        }
+      });
   };
 
   const handleFileChange = (event) => {
     const eventFile = event.target.files[0];
 
     setFile(eventFile);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -51,12 +51,13 @@ const CustomerImportForm = ({
           <div className="row">
             <ul>
               Unable to save customer import:
-              {submitErrors.map(error => <li>{error}</li>)}
+              {submitErrors.map((error) => <li>{error}</li>)}
             </ul>
           </div>
         )}
         <div className="row">
           <div className="ten columns">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="file">File</label>
             <input
               id="file"
