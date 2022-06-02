@@ -47,7 +47,10 @@ class CustomerImport::Importer
   end
 
   def create_customer(data)
-    customer_attributes = data.slice(*CustomerImport::FileSchema::CUSTOMER_COLUMNS)
+    customer_attributes =
+      data.
+        slice(*CustomerImport::FileSchema::CUSTOMER_COLUMNS).
+        merge({ customer_import_id: customer_import.id })
     customer = Customer.create!(customer_attributes)
   end
 

@@ -6,4 +6,5 @@ class Customer < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
 
   has_many :vehicles, dependent: :destroy
+  belongs_to :customer_import
 end

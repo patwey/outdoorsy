@@ -15,6 +15,7 @@ describe CustomerImport do
 
   context "associations" do
     it { should have_one_attached(:file) }
+    it { should have_many(:customers) }
   end
 
   describe "#process" do

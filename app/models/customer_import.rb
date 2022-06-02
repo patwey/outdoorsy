@@ -8,6 +8,7 @@ class CustomerImport < ApplicationRecord
   validate :file_attached
 
   has_one_attached :file
+  has_many :customers
 
   def process
     CustomerImport::ImporterJob.perform_later(id)

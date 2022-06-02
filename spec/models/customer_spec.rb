@@ -13,5 +13,6 @@ describe Customer do
 
   context "associations" do
     it { should have_many(:vehicles).dependent(:destroy) }
+    it { should belong_to(:customer_import) }
   end
 end
