@@ -31,13 +31,11 @@ The application currently supports .txt or .csv files deliniated by commas or pi
 
 To see some example import files, check out [spec/fixtures](https://github.com/patwey/outdoorsy/tree/main/spec/fixtures)
 
+#### Schema
+
+TODO
+
+
 ### Setup
 
-* Ruby version
-* System dependencies
-* Configuration
-* Database creation
-* Database initialization
-* How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
+TODO
