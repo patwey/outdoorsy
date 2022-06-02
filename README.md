@@ -117,7 +117,19 @@ $ bundle install
 
 #### Install Redis
 
-Follow the instructions [here](https://redis.io/docs/getting-started/) to ensure redis is installed on your system
+Follow the instructions [here](https://redis.io/docs/getting-started/) to ensure redis is installed
+
+#### Install Node.js and npm
+
+Follow the instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install Node.js and npm. I was running into issues with the lastest node version and webpack. I was able to get around them by switching to v16.9.1 (see: https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported)
+
+#### Install yarn
+Follow the instructions [here](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) to ensure yarn is installed
+
+Install yarn dependencies
+```bash
+$ yarn install
+```
 
 ### Starting the Application
 Run the migration with:
