@@ -22,6 +22,12 @@ module Api
         json_response(CustomerImportSerializer.new(customer_imports))
       end
 
+      def show
+        customer_import = CustomerImport.find(params[:id])
+
+        json_response(CustomerImportSerializer.new(customer_import))
+      end
+
       private
 
       def customer_import_params

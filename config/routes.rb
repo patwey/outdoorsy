@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :customer_imports, only: [:create, :index]
+      resources :customer_imports, only: [:create, :index, :show]
       resources :customers, only: [:index]
     end
   end

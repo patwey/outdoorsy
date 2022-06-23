@@ -7,19 +7,19 @@ const CustomerImports = ({
 }) => {
   const [customerImports, setCustomerImports] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      "/api/v1/customer_imports",
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
+  useEffect(fetchCustomerImports, []);
+
+  const fetchCustomerImports = () => fetch(
+    "/api/v1/customer_imports",
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
       },
-    )
-      .then((response) => response.json())
-      .then((response) => setCustomerImports(response.data));
-  }, []);
+    },
+  )
+    .then((response) => response.json())
+    .then((response) => setCustomerImports(response.data));
 
   const appendCustomerImport = (customerImport) => (
     setCustomerImports([customerImport, ...customerImports])
@@ -30,6 +30,7 @@ const CustomerImports = ({
       <CustomerImportForm
         token={token}
         appendCustomerImport={appendCustomerImport}
+        fetchCustomerImports={fetchCustomerImports}
       />
       <CustomerImportTable customerImports={customerImports} />
     </div>

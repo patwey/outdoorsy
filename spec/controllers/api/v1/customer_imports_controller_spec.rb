@@ -42,4 +42,16 @@ describe Api::V1::CustomerImportsController do
       expect(record["file"]["filename"]).to eq(file.original_filename)
     end
   end
+
+  describe "GET show" do
+    let(:customer_import) { create(:customer_import, status: CustomerImport::PROCESSING) }
+
+    it "returns a customer import" do
+      get :show, params: { id: customer_import.id }
+
+      record = JSON.parse(response.body)["data"]
+
+      expect(record["status"]).to eq("processing")
+    end
+  end
 end

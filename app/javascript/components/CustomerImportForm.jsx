@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CustomerImportForm = ({
   appendCustomerImport,
   token,
+  fetchCustomerImports,
 }) => {
   const [file, setFile] = useState(null);
   const [submitErrors, setSubmitErrors] = useState([]);
+  const [processing, setProcessing] = useState([]);
+
+  useEffect(getStatuses, [processing])
+
+  const getStatuses = () => {
+    processing.forEach((id) => {
+      fetch(
+        `api/v1/customer_imports/${id}`,
+        {
+          headers: {
+            "X-CSRF-Token": token,
+            Accept: "application/json",
+          },
+        },
+      )
+        .then((response) => response.json())
+        .then(({ data: { status } }) => {
+          if (status === "complete") {
+            const newProcessing = processing.filter((pid) => pid !== id);
+
+            setProcessing(newProcessing);
+            fetchCustomerImports();
+          }});
+    });
+
+    if (processing.length > 0) {
+      getStatuses();
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,6 +63,7 @@ const CustomerImportForm = ({
           setSubmitErrors(errors);
         } else {
           appendCustomerImport(data);
+          setProcessing([data.id ,...processing]);
         }
       });
   };
